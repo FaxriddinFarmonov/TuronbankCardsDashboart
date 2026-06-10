@@ -1,0 +1,67 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django
+db.sqlite3
+media/
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv/
+
+# PyCharm
+.idea/
+
+# VS Code
+.vscode/
+
+# Logs
+*.log
+
+# Environment variables
+.env
+
+# Static files
+staticfiles/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Build
+build/
+dist/
+*.egg-info/
+
+# Migrations (agar xohlasang)
+# */migrations/*
+# !*/migrations/__init__.py
+
+# Coverage
+.coverage
+htmlcov/
+
+# Cache
+.pytest_cache/
+.mypy_cache/
+
+# Windows
+desktop.ini
+
+# Excel files (kerak bo'lmasa)
+*.xlsx
+*.xls
+
+# Backup files
+*.bak
+venv/
+.idea/
+__pycache__/
+*.pyc
+db.sqlite3
+.env
+atm_analytics/__pycache__/

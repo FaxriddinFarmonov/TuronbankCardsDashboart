@@ -1,0 +1,151 @@
+{% extends "admin/change_list.html" %}
+
+{% block object-tools %}
+
+<li>
+    <a href="upload-excel/" class="addlink">
+        📥 Excel yuklash
+    </a>
+</li>
+
+{{ block.super }}
+
+{% endblock %}
+
+{% block content %}
+
+<style>
+
+.summary {
+    background: linear-gradient(135deg,#4f6df5,#6a82fb);
+    color: white;
+    padding: 16px;
+    border-radius: 14px;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 12px rgba(79,109,245,0.2);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 16px;
+    margin-top: 15px;
+}
+.card {
+
+    background: #fff;
+    border-radius: 14px;
+    padding: 14px;
+    border: 1px solid #eef0f3;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    transition: 0.2s;
+    height: 300px;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+.title {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #2c3e50;
+}
+
+canvas {
+    width: 100% !important;
+    height: 220px !important;
+}
+.filter-bar {
+    display:flex;
+    gap:8px;
+    margin-bottom:10px;
+    flex-wrap:wrap;
+}
+
+.filter-bar a {
+    padding:6px 10px;
+    background:#eef2f7;
+    border-radius:6px;
+    font-size:12px;
+    text-decoration:none;
+    color:#333;
+}
+
+.filter-bar a.active {
+    background:#417690;
+    color:#fff;
+}
+
+</style>
+
+<div class="summary">
+    💳 Jami kartalar: {{ total_cards }}
+</div>
+
+<!-- CARD TYPE FILTER BUTTONS -->
+<div class="filter-bar">
+    <a href="?">All</a>
+    <a href="?card_system=HUMO">HUMO</a>
+    <a href="?card_system=MASTER">MASTER CARD</a>
+    <a href="?card_system=UZCARD">UZCARD</a>
+    <a href="?card_system=VISA">VISA</a>
+</div>
+
+<div class="grid">
+
+    <!-- CARD TYPE -->
+    <div class="card">
+        <div class="title">📊 Card Type</div>
+        <canvas id="typeChart"></canvas>
+    </div>
+
+    <!-- STATUS -->
+    <div class="card">
+        <div class="title">📊 Card Status</div>
+        <canvas id="statusChart"></canvas>
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+function barChart(id, data, key){
+
+    const labels = data.map(i => i[key]);
+    const values = data.map(i => i.total);
+
+    new Chart(document.getElementById(id),{
+        type:'bar',
+        data:{
+            labels:labels,
+            datasets:[{
+                label:'Soni',
+                data:values,
+                borderRadius:6
+            }]
+        },
+        options:{
+            responsive:true,
+            maintainAspectRatio:false,
+            plugins:{
+                legend:{display:false}
+            },
+            scales:{
+                y:{beginAtZero:true}
+            }
+        }
+    });
+}
+barChart("typeChart", {{ card_type_chart|safe }}, "card_system");
+barChart("statusChart", {{ status_chart|safe }}, "card_status");
+</script>
+
+{{ block.super }}
+
+{% endblock %}
