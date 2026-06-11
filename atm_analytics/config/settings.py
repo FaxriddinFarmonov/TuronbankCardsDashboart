@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'apps.analiz_tablitsa',
     'rest_framework',
     "corsheaders",
-    'rangefilter'
 
 
 ]
@@ -124,18 +123,17 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
+STATIC_URL = "/static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
-STATIC_URL = 'static/'
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-CRONJOBS = [
+# 👇 SHU YERGA QO‘YILADI
+import os
 
-    # Dushanba 00:00
-    ('0 0 * * 1', 'apps.analiz_tablitsa.servicesDashboart.sync_dashboard_cron'),
-    ('5 0 * * 1', 'apps.analiz_tablitsa.servicesActiveBranch.sync_head_office_activity_cron'),
-    ('10 0 * * 1','apps.analiz_tablitsa.servicesDashboart.sync_card_type_statistics_cron'),
-
-]
+os.makedirs(MEDIA_ROOT, exist_ok=True)
+os.makedirs(STATIC_ROOT, exist_ok=True)
 
 from django.db.backends.signals import connection_created
 from django.dispatch import receiver
