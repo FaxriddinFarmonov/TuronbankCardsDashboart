@@ -23,9 +23,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-sh!i-_+_28od^8mh=&(z%@xtuf116!gpn4ci@z_3bjl2u$8k&z'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = [
+    "card-info.turonbank.uz",
+    "127.0.0.1",
+    "localhost",
+]
 
 
 # Application definition
@@ -41,7 +45,7 @@ INSTALLED_APPS = [
     'apps.analiz_tablitsa',
     'rest_framework',
     "corsheaders",
-
+    "rangefilter"
 
 ]
 
@@ -55,13 +59,23 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
-    "https://your-frontend.com"
+    "https://your-frontend.com",
+    "http://card-info.turonbank.uz",
+    "https://card-info.turonbank.uz"
 ]
-ROOT_URLCONF = 'config.urls'
 
+# CSRF uchun alohida sozlama - BU MUHIM!
+CSRF_TRUSTED_ORIGINS = [
+    "http://card-info.turonbank.uz",
+    "https://card-info.turonbank.uz",
+]
+
+
+ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -85,8 +99,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'bankdb',
+        'USER': 'bankuser',
+        'PASSWORD': 'Farmonov2508',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
 
