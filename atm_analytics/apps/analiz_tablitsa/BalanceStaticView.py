@@ -1,7 +1,13 @@
-
+from rest_framework.response import Response
 
 import requests
 from rest_framework.views import APIView
+from rest_framework.test import APIRequestFactory
+
+from .models import (
+    BalanceStatisticsReport,
+    BalanceStatisticsItem,
+)
 
 
 
@@ -42,11 +48,6 @@ class SyncBalanceStatisticsAPIView(APIView):
             "report_id": report.id
         })
 
-from rest_framework.views import APIView
-from rest_framework.response import Response
-
-from .models import BalanceStatisticsReport, BalanceStatisticsItem
-
 
 class BalanceStatisticsAPIView(APIView):
 
@@ -73,3 +74,22 @@ class BalanceStatisticsAPIView(APIView):
             ]
         })
 
+
+
+def sync_balance_statistics_cron():
+
+    try:
+
+        factory = APIRequestFactory()
+
+        request = factory.post(
+            "/balance-statistics/sync/"
+        )
+
+        response = SyncBalanceStatisticsAPIView.as_view()(request)
+
+        print("SUCCESS:", response.data)
+
+    except Exception as e:
+
+        print("ERROR:", str(e))

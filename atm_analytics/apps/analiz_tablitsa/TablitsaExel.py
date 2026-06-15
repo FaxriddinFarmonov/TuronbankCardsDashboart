@@ -1,6 +1,7 @@
 import requests
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.test import APIRequestFactory
 
 
 
@@ -74,15 +75,6 @@ class SyncBranchDashboardAPIView(APIView):
             "report_id": report.id
         })
 
-
-
-
-from rest_framework.views import APIView
-from rest_framework.response import Response
-
-from .models import BranchDashboardReport
-
-
 class BranchDashboardAPIView(APIView):
 
     def get(self, request):
@@ -130,4 +122,24 @@ class BranchDashboardAPIView(APIView):
             ]
         })
 
+
+def sync_branch_dashboard_cron():
+
+    try:
+
+        # CHILD TABLELAR
+
+
+        factory = APIRequestFactory()
+
+        request = factory.post(
+            "/branch-dashboard/sync/"
+        )
+
+        response = SyncBranchDashboardAPIView.as_view()(request)
+
+        print("SUCCESS:", response.data)
+
+    except Exception as e:
+        print("ERROR:", str(e))
 

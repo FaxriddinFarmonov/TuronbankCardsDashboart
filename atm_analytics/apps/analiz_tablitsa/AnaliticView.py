@@ -1,9 +1,5 @@
-
-
+from rest_framework.test import APIRequestFactory
 from .models import AnalyticsReport, CardStatusItem, ResidentItem, ClientTypeItem
-
-
-
 
 def save_analytics(data: dict):
 
@@ -115,3 +111,24 @@ class AnalyticsAPIView(APIView):
             ]
         })
 
+
+
+def sync_analytics_cron():
+
+    try:
+
+
+
+        factory = APIRequestFactory()
+
+        request = factory.post(
+            "/analytics/sync/"
+        )
+
+        response = SyncAnalyticsAPIView.as_view()(request)
+
+        print("SUCCESS:", response.data)
+
+    except Exception as e:
+
+        print("ERROR:", str(e))

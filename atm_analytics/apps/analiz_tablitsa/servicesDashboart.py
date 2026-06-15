@@ -87,8 +87,6 @@ class Command(BaseCommand):
 def sync_dashboard_cron():
 
     try:
-        DashboardStatistics.objects.all().delete()
-
         factory = APIRequestFactory()
 
         request = factory.get("/dashboard/sync/")

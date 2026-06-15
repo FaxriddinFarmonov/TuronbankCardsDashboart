@@ -1,9 +1,8 @@
 
 import requests
-
+from rest_framework.test import APIRequestFactory
 from rest_framework.views import APIView
 from rest_framework.response import Response
-
 from .models import MonthlyIssuedCardsReport, MonthlyIssuedCardsItem
 
 
@@ -64,3 +63,22 @@ class MonthlyIssuedCardsAPIView(APIView):
                 for item in report.monthly_cards.all()
             }
         })
+
+
+def sync_monthly_issued_cards_cron():
+
+    try:
+
+
+        factory = APIRequestFactory()
+
+        request = factory.post(
+            "/monthly-issued-cards/sync/"
+        )
+
+        response = SyncMonthlyIssuedCardsAPIView.as_view()(request)
+
+        print("SUCCESS:", response.data)
+
+    except Exception as e:
+        print("ERROR:", str(e))

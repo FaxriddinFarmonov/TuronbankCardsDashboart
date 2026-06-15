@@ -1,7 +1,7 @@
 
 import requests
 from rest_framework.views import APIView
-from rest_framework.response import Response
+from rest_framework.test import APIRequestFactory
 
 
 
@@ -73,3 +73,22 @@ class CardCategoryAPIView(APIView):
                 for i in report.statistics.all()
             ]
         })
+
+
+def sync_card_category_cron():
+
+    try:
+
+        factory = APIRequestFactory()
+
+        request = factory.post(
+            "/card-category-statistics/sync/"
+        )
+
+        response = SyncCardCategoryAPIView.as_view()(request)
+
+        print("SUCCESS:", response.data)
+
+    except Exception as e:
+
+        print("ERROR:", str(e))

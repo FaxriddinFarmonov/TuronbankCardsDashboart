@@ -31,7 +31,6 @@ urlpatterns = [
         name="sync-card-type-statistics",
     ),
 
-
     path("analytics/", AnalyticsAPIView.as_view()),
     path("analytics/sync/", SyncAnalyticsAPIView.as_view()),
 

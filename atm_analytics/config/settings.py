@@ -167,3 +167,38 @@ def configure_sqlite(sender, connection, **kwargs):
         cursor.execute('PRAGMA journal_mode=WAL;')
 
         cursor.execute('PRAGMA synchronous=OFF;')
+
+
+CRONJOBS = [
+
+    ('0 0 * * 1',
+     'apps.analiz_tablitsa.servicesDashboart.sync_dashboard_cron'),
+
+    ('5 0 * * 1',
+     'apps.analiz_tablitsa.servicesDashboart.sync_head_office_activity_cron'),
+
+    ('10 0 * * 1',
+     'apps.analiz_tablitsa.servicesDashboart.sync_card_type_statistics_cron'),
+
+    ('15 0 * * 1',
+     'apps.analiz_tablitsa.servicesDashboart.sync_analytics_cron'),
+
+    ('20 0 * * 1',
+     'apps.analiz_tablitsa.servicesDashboart.sync_balance_statistics_cron'),
+
+    ('25 0 * * 1',
+     'apps.analiz_tablitsa.servicesDashboart.sync_activity_period_cron'),
+
+    ('30 0 * * 1',
+     'apps.analiz_tablitsa.servicesDashboart.sync_card_category_cron'),
+
+    ('35 0 * * 1',
+     'apps.analiz_tablitsa.servicesDashboart.sync_expire_cards_cron'),
+
+    ('40 0 * * 1',
+     'apps.analiz_tablitsa.servicesDashboart.sync_monthly_issued_cards_cron'),
+
+    ('45 0 * * 1',
+     'apps.analiz_tablitsa.servicesDashboart.sync_branch_dashboard_cron'),
+
+]

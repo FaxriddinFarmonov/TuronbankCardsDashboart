@@ -1,4 +1,5 @@
 
+from rest_framework.test import APIRequestFactory
 from rest_framework.views import APIView
 import requests
 from django.core.management.base import BaseCommand
@@ -97,3 +98,23 @@ class Command(BaseCommand):
         self.stdout.write(
             self.style.SUCCESS("Expire cards synced successfully")
         )
+
+
+def sync_expire_cards_cron():
+
+    try:
+
+
+        factory = APIRequestFactory()
+
+        request = factory.post(
+            "/expire-cards/sync/"
+        )
+
+        response = SyncExpireCardsAPIView.as_view()(request)
+
+        print("SUCCESS:", response.data)
+
+    except Exception as e:
+
+        print("ERROR:", str(e))

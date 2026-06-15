@@ -102,10 +102,6 @@ def sync_card_type_statistics_cron():
 
     try:
 
-        # Eski ma'lumotlarni o'chirish
-        CardTypeItem.objects.all().delete()
-        CardTypeStatistics.objects.all().delete()
-
         factory = APIRequestFactory()
 
         request = factory.post(

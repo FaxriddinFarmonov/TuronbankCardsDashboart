@@ -68,10 +68,6 @@ def sync_head_office_activity_cron():
 
     try:
 
-        # Eski ma'lumotlarni tozalash
-        HeadOfficeItem.objects.all().delete()
-        HeadOfficeActivity.objects.all().delete()
-
         factory = APIRequestFactory()
 
         request = factory.post(

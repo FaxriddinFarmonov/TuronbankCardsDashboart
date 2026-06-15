@@ -1,9 +1,8 @@
 
 import requests
-
 from rest_framework.views import APIView
 from rest_framework.response import Response
-
+from rest_framework.test import APIRequestFactory
 from .models import ActivityPeriodReport, ActivityPeriodItem
 
 
@@ -72,3 +71,23 @@ class ActivityPeriodAPIView(APIView):
             ]
         })
 
+
+
+def sync_activity_period_cron():
+
+    try:
+
+
+        factory = APIRequestFactory()
+
+        request = factory.post(
+            "/activity-period-statistics/sync/"
+        )
+
+        response = SyncActivityPeriodAPIView.as_view()(request)
+
+        print("SUCCESS:", response.data)
+
+    except Exception as e:
+
+        print("ERROR:", str(e))
