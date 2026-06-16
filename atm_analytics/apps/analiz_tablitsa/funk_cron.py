@@ -1,13 +1,13 @@
-from atm_analytics.apps.analiz_tablitsa.ActivityPeriodCardView import sync_activity_period_cron
-from atm_analytics.apps.analiz_tablitsa.AnaliticView import sync_analytics_cron
-from atm_analytics.apps.analiz_tablitsa.BalanceStaticView import sync_balance_statistics_cron
-from atm_analytics.apps.analiz_tablitsa.CardCategoryView import sync_card_category_cron
-from atm_analytics.apps.analiz_tablitsa.CardTypeView import sync_card_type_statistics_cron
-from atm_analytics.apps.analiz_tablitsa.ExpireCardsView import sync_expire_cards_cron
-from atm_analytics.apps.analiz_tablitsa.MonthlyView import sync_monthly_issued_cards_cron
-from atm_analytics.apps.analiz_tablitsa.TablitsaExel import sync_branch_dashboard_cron
-from atm_analytics.apps.analiz_tablitsa.servicesActiveBranch import sync_head_office_activity_cron
-from atm_analytics.apps.analiz_tablitsa.servicesDashboart import sync_dashboard_cron
+from .ActivityPeriodCardView import sync_activity_period_cron
+from .AnaliticView import sync_analytics_cron
+from .BalanceStaticView import sync_balance_statistics_cron
+from .CardCategoryView import sync_card_category_cron
+from .CardTypeView import sync_card_type_statistics_cron
+from .ExpireCardsView import sync_expire_cards_cron
+from .MonthlyView import sync_monthly_issued_cards_cron
+from .TablitsaExel import sync_branch_dashboard_cron
+from .servicesActiveBranch import sync_head_office_activity_cron
+from .servicesDashboart import sync_dashboard_cron
 
 
 
@@ -26,7 +26,6 @@ class SyncAllDashboardsAPIView(APIView):
         result = sync_all_crons()
 
         return Response(result)
-
 
 
 
