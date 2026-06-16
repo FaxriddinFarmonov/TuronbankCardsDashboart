@@ -64,7 +64,7 @@ class SyncBranchDashboardAPIView(APIView):
 
     BranchDashboardReport.objects.all().delete()   # eski malumotlar ochirilib kn yangisi qoyiladi
     BranchDashboardItem.objects.all().delete()
-    BranchDormantStat.objects.all().delete()
+    BranchCardTypeStat.objects.all().delete()
     BranchBalance.objects.all().delete()
     BranchDormantStat.objects.all().delete()
 
