@@ -61,6 +61,11 @@ def save_branch_dashboard(data: dict):
 
 
 class SyncBranchDashboardAPIView(APIView):
+    BranchDashboardReport.objects.all().delete()
+    BranchDashboardItem.objects.all().delete()
+    BranchDormantStat.objects.all().delete()
+    BranchBalance.objects.all().delete()
+    BranchDormantStat.objects.all().delete()
 
     def post(self, request):
 
