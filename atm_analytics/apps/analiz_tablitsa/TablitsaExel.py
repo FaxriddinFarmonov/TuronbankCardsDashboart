@@ -62,12 +62,6 @@ def save_branch_dashboard(data: dict):
 
 class SyncBranchDashboardAPIView(APIView):
 
-    BranchDashboardReport.objects.all().delete()   # eski malumotlar ochirilib kn yangisi qoyiladi
-    BranchDashboardItem.objects.all().delete()
-    BranchCardTypeStat.objects.all().delete()
-    BranchBalance.objects.all().delete()
-    BranchDormantStat.objects.all().delete()
-
     def post(self, request):
 
         data = requests.get(
@@ -84,12 +78,11 @@ class SyncBranchDashboardAPIView(APIView):
 class BranchDashboardAPIView(APIView):
 
     def get(self, request):
-
         report = BranchDashboardReport.objects.prefetch_related(
             "branches__card_types",
             "branches__balances",
             "branches__dormant"
-        ).first()
+        ).order_by("-id").first()
 
         if not report:
             return Response({"message": "no data"}, status=404)
