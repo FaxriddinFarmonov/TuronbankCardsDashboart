@@ -10,6 +10,7 @@ from .MonthlyView import MonthlyIssuedCardsAPIView, SyncMonthlyIssuedCardsAPIVie
 from .TablitsaExel import BranchDashboardAPIView, SyncBranchDashboardAPIView
 from .apiFrontActiveBranch import HeadOfficeActivityAPIView
 from  .dashboart_view import DashboardStatisticsAPIView
+from .funk_cron import SyncAllDashboardsAPIView
 from .servicesActiveBranch import SyncHeadOfficeActivityAPIView
 from .servicesDashboart import SyncDashboardAPIView
 
@@ -29,6 +30,11 @@ urlpatterns = [
         "card-type-statistics/sync/",
         SyncCardTypeStatisticsAPIView.as_view(),
         name="sync-card-type-statistics",
+    ),
+    path(
+        "sync-all-dashboards/",
+        SyncAllDashboardsAPIView.as_view(),
+        name="sync-all-dashboards"
     ),
 
     path("analytics/", AnalyticsAPIView.as_view()),
